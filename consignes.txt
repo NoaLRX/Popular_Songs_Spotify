@@ -1,0 +1,28 @@
+Projet
+
+Objectif : Réaliser un projet de machine learning sur un dataset de 4000 observations minimuns.
+
+    Vous devez obligatoirement réaliser une régression ou classification en comparant différents modèles (SVM, Modèle linéaire, Random Forest, ...).
+    Vous devez également interpréter localement et globalement votre modèle de machine learning avec les méthodes vues dans la partie explicabilité et interprétabilité.
+
+Modalités Pour l'évaluation vous devrez me soumettre un projet comportant un fichier .md(markdown) qui contient les commentaires et résultats de votre projet. Présentation de vos résultats, discussion du choix des méthodes, vos analyses, ... Il faudra également me joindre un fichier en .py ou .ipynb avec votre code.
+
+Tous ces éléments devront être déposés dans un repo Github à votre nom/vos noms!
+
+Date de rendu 10-05-2025 23:59:59. Si vous dépassez cette date ce sera 0 et pas de correction de ma part.
+
+Elements de notation :
+
+    Créer un repos Github pour 1 ou 2 personnes. (2 max par projet) (0 point)
+    Choix d'un dataset et d'une problématique de modélisation à valider le 30 Janvier (2 points)
+    Un fichier .md expliquant ce que vous avez fait, ce que vous avez essayé, ce qui a marché, ce qui n'a pas marché, et quels sont vos résultats (10 points)
+    Votre fichier avec le code en version .py ou .ipynb réutilisable, lisible avec des commentaires (10 points)
+    Votre code doit être re-éxecutable cela signifie qu'il me faut :
+        Votre version de python
+        Votre dataset brut
+        Un requirements.txt avec les packages utilisés
+        Une spécification des hyperparamètres de votre meilleur modèle
+
+Evalluation du Td N°2 :
+
+Date de rendu : 07-03-2024

@@ -1,98 +1,118 @@
-# Spotify Track Popularity Prediction
+# Projet d'Explicabilité - Prédiction de la Popularité des Titres Spotify
 
-Ce projet vise à développer un modèle prédictif pour la variable "Track Popularity" en utilisant les méthodes apprises dans le cours de SVM et réseaux de neurones.
+Ce projet implémente plusieurs modèles de machine learning pour prédire la popularité des titres Spotify, en mettant l'accent sur l'explicabilité des modèles. Il applique la méthodologie du TD2 d'explicabilité.
 
-## Contexte
+## Objectifs
 
-La popularité d'une piste sur Spotify est un score allant de 0 à 100 qui est calculé en fonction du nombre total d'écoutes d'une chanson par rapport aux autres chansons. Prédire cette variable pourrait aider les artistes et labels à comprendre quelles caractéristiques audio influencent la popularité d'une chanson.
+- Prédire la popularité d'un titre Spotify à partir de ses caractéristiques audio et métadonnées
+- Comparer différents modèles prédictifs (Régression Linéaire, Random Forest, SVM)
+- Interpréter les modèles de manière globale et locale
+- Identifier les facteurs clés qui influencent la popularité d'un titre
+
+## Structure du Projet
+
+```
+├── Data/                 # Dossier contenant les données Spotify
+│   ├── high_popularity_spotify_data.csv
+│   └── low_popularity_spotify_data.csv
+├── img/                  # Dossier contenant les visualisations générées
+├── venv/                 # Environnement virtuel Python
+├── ultime.py             # Script principal d'analyse
+├── README.md             # Documentation du projet
+└── requirements.txt      # Dépendances Python
+```
+
+## Installation
+
+1. Cloner ce dépôt
+2. Créer un environnement virtuel et l'activer :
+```bash
+python -m venv venv
+source venv/bin/activate  # Sur Unix/MacOS
+# ou
+venv\Scripts\activate     # Sur Windows
+```
+3. Installer les dépendances :
+```bash
+pip install -r requirements.txt
+```
+
+## Utilisation
+
+Exécuter le script principal :
+```bash
+python ultime.py
+```
+
+Le script effectue automatiquement :
+1. Le chargement et la préparation des données
+2. La création et l'évaluation des modèles baseline
+3. L'interprétation du modèle linéaire
+4. L'optimisation des modèles complexes
+5. L'interprétation globale et locale du meilleur modèle
+6. La génération de visualisations dans le dossier `img/`
 
 ## Méthodologie
 
-Deux approches principales ont été implémentées et comparées :
+### Préparation des Données
 
-1. **Support Vector Machine (SVM)** - Une méthode de régression non-linéaire utilisant différents noyaux
-2. **Réseau de Neurones (MLP)** - Un perceptron multicouche pour modéliser des relations complexes
+- Nettoyage et analyse exploratoire des données
+- Transformation des variables (logarithmique pour les distributions asymétriques)
+- Création de features dérivées (statistiques par artiste, âge du morceau)
+- Winsorisation pour gérer les outliers
+- Standardisation des variables numériques uniquement
 
-### Jeu de données
+### Modélisation
 
-Le jeu de données se compose de deux fichiers CSV :
-- `high_popularity_spotify_data.csv` - Contenant des pistes à forte popularité
-- `low_popularity_spotify_data.csv` - Contenant des pistes à faible popularité
+- **Régression Linéaire** : Modèle interprétable pour comprendre les relations linéaires
+- **Random Forest** : Modèle complexe optimisé avec RandomizedSearchCV
+- **SVM** : Support Vector Machine avec différents noyaux
 
-Les caractéristiques numériques utilisées pour la prédiction incluent :
-- energy
-- tempo
-- danceability
-- loudness
-- liveness
-- valence
-- speechiness
-- instrumentalness
-- acousticness
-- duration_ms
+### Explicabilité
 
-### Prétraitement des données
+- **Interprétation Globale** :
+  - Importance des features
+  - Permutation Feature Importance
+  - Partial Dependence Plots (PDP)
 
-1. Fusion des deux jeux de données
-2. Suppression des valeurs manquantes
-3. Standardisation des caractéristiques (mise à l'échelle)
-4. Division en ensembles d'entraînement et de test (80/20)
+- **Explicabilité Locale** :
+  - Individual Conditional Expectation (ICE)
+  - LIME (Local Interpretable Model-agnostic Explanations)
+  - SHAP (SHapley Additive exPlanations)
 
-### Modèle SVM
+## Résultats
 
-Selon le cours, les SVM sont efficaces pour des problèmes de régression non-linéaire. Nous avons utilisé un SVR (Support Vector Regression) avec différents noyaux et hyperparamètres :
+Les résultats complets sont générés lors de l'exécution du script, incluant :
+- Comparaison des performances des modèles (RMSE, R², MAE)
+- Identification des variables les plus importantes
+- Visualisations interactives des relations entre variables
+- Explications détaillées de prédictions individuelles
 
-- Un pipeline incluant la standardisation des données
-- Recherche par grille des meilleurs hyperparamètres :
-  - C (paramètre de régularisation)
-  - Kernel (linéaire ou RBF)
-  - Gamma (échelle, auto, ou valeurs spécifiques)
-- Validation croisée à 5 plis
+## Configuration Python
 
-### Modèle de Réseau de Neurones
+Ce projet a été développé avec Python 3.9 et les bibliothèques suivantes :
+- pandas
+- numpy
+- scikit-learn
+- matplotlib
+- seaborn
+- shap
+- lime
 
-Selon les recommandations du cours ANN, nous avons construit un réseau de neurones avec :
+Pour les versions précises, voir `requirements.txt`.
 
-- 3 couches cachées (100, 50, 25 neurones)
-- Fonction d'activation ReLU pour les couches cachées
-- Pas de fonction d'activation pour la couche de sortie (problème de régression)
-- Dropout pour éviter le surapprentissage
-- Optimiseur Adam
-- Fonction de perte MSE (erreur quadratique moyenne)
-- Early stopping pour éviter le surapprentissage
+## Hyperparamètres Optimaux
 
-## Évaluation et comparaison des modèles
+Les hyperparamètres optimaux sont déterminés dynamiquement pendant l'exécution du script via la validation croisée. Ils sont affichés dans les résultats finaux.
 
-Les modèles sont évalués en fonction de :
-- MSE (Mean Squared Error)
-- RMSE (Root Mean Squared Error)
-- R² (coefficient de détermination)
+## Licence
 
-## Résultats et analyse
+Ce projet est fourni sous licence MIT.
 
-Après l'entraînement, les performances des deux modèles sont comparées pour déterminer lequel est le plus adapté à la prédiction de la popularité des pistes Spotify.
+## Contributeurs
 
-L'analyse comprend également :
-- La distribution de la variable cible
-- Les corrélations entre les caractéristiques et la popularité
-- Pour le SVM linéaire, l'importance des caractéristiques
-- Pour le réseau de neurones, les courbes d'apprentissage
+- Noa (étudiant)
 
-## Conclusion
+## Remerciements
 
-Le script identifie automatiquement la meilleure méthode (SVM ou réseau de neurones) en fonction du score R², qui mesure la proportion de la variance dans la variable cible qui est prédictible à partir des variables explicatives.
-
-## Comment exécuter le code
-
-```bash
-python spotify_popularity_prediction.py
-```
-
-## Sorties
-
-Le script génère plusieurs visualisations :
-- Distribution de la popularité des pistes
-- Corrélations des caractéristiques avec la popularité
-- Performances prédictives des modèles
-- Courbes d'apprentissage du réseau de neurones
-- Importance des caractéristiques pour le SVM (si noyau linéaire)
+- Professeur de Data Science pour le TD2 d'explicabilité qui a servi de méthodologie de référence.
