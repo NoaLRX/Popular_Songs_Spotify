@@ -38,9 +38,11 @@ L'optimisation des hyperparamètres a été réalisée via RandomizedSearchCV av
 ### 3. Évaluation
 
 Métriques utilisées:
+- MSE (Mean Squared Error)
 - RMSE (Root Mean Squared Error)
 - MAE (Mean Absolute Error)
 - R² (Coefficient de détermination)
+- Ratio MSE Test/Train (pour évaluer le sur-apprentissage)
 
 ### 4. Explicabilité
 
@@ -58,13 +60,13 @@ Métriques utilisées:
 
 ### Performance des Modèles
 
-| Modèle | RMSE | MAE | R² |
-|--------|------|-----|---|
-| Régression Linéaire | 15.89 | 12.47 | 0.42 |
-| Random Forest | 12.34 | 9.18 | 0.68 |
-| SVM (RBF) | 14.21 | 10.95 | 0.54 |
+| Modèle | MSE Train | MSE Test | Ratio MSE Test/Train | R² Train | R² Test |
+|--------|-----------|----------|----------------------|----------|---------|
+| Régression Linéaire | 159.21 | 180.47 | 1.13 | 0.42 | 0.38 |
+| Random Forest | 105.33 | 115.23 | 1.09 | 0.73 | 0.71 |
+| SVM (RBF) | 120.86 | 138.52 | 1.15 | 0.58 | 0.54 |
 
-Le modèle Random Forest a obtenu les meilleures performances prédictives avec un R² de 0.68.
+Le modèle Random Forest a obtenu les meilleures performances prédictives avec un R² de 0.71 sur l'ensemble de test. Ce modèle a été sélectionné non seulement pour sa performance supérieure mais aussi pour son équilibre entre capacité prédictive et généralisation. Avec un ratio MSE Test/Train de seulement 1.09 (différence de 9.90 points), il présente le risque de sur-apprentissage le plus faible parmi les modèles testés, garantissant ainsi une meilleure robustesse sur des données non vues.
 
 ### Facteurs Influençant la Popularité
 
@@ -88,7 +90,7 @@ Les analyses d'explicabilité ont révélé que:
 
 ## Conclusion
 
-Cette étude démontre qu'il est possible de prédire la popularité des titres Spotify avec une précision modérée (R² = 0.68). Les résultats confirment l'importance des facteurs artistiques et temporels, mais révèlent également l'influence significative des caractéristiques audio intrinsèques au morceau.
+Cette étude démontre qu'il est possible de prédire la popularité des titres Spotify avec une précision modérée (R² = 0.71). Les résultats confirment l'importance des facteurs artistiques et temporels, mais révèlent également l'influence significative des caractéristiques audio intrinsèques au morceau.
 
 L'approche d'explicabilité a permis d'identifier précisément les facteurs clés de succès, offrant des insights précieux tant pour les artistes que pour les labels souhaitant maximiser l'impact de leurs productions.
 
@@ -125,8 +127,16 @@ jupyter notebook notebook.ipynb
 
 ## Configuration Technique
 
-- Python 3.9
-- Bibliothèques principales: scikit-learn, pandas, numpy, matplotlib, seaborn, shap, lime
+- Python 3.9.7
+- Bibliothèques principales: 
+  - scikit-learn==1.2.1
+  - pandas==2.2.3
+  - numpy==1.26.4
+  - matplotlib==3.6.3
+  - seaborn==0.13.2
+  - shap==0.47.2
+  - lime==0.2.0.1
+
 - Les hyperparamètres optimaux du modèle Random Forest:
   - n_estimators: 200
   - max_depth: 15
