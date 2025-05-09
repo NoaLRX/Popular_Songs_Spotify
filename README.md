@@ -72,12 +72,14 @@ Le modèle Random Forest a obtenu les meilleures performances prédictives avec 
 
 Les analyses d'explicabilité ont révélé que:
 
-1. Les facteurs les plus influents sont:
-   - La notoriété de l'artiste
-   - L'actualité du morceau (date de sortie récente)
-   - Le genre musical (pop et rap ayant un avantage)
-   - La danceability (caractère dansant)
-   - L'energy (intensité énergétique)
+1. Les facteurs les plus influents sont (par ordre d'importance):
+   - track_album_id_numeric (identifiant numérique de l'album)
+   - artist_id (identifiant de l'artiste)
+   - playlist_id_numeric (identifiant numérique de la playlist)
+   - track_age_days (âge du morceau en jours)
+   - release_date_numeric (date de sortie numérique)
+   - loudness_transformed (puissance sonore transformée)
+   - loudness (puissance sonore)
 
 2. Relations non-linéaires importantes:
    - La durée optimale se situe entre 3 et 4 minutes
