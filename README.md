@@ -148,4 +148,4 @@ jupyter notebook notebook.ipynb
 
 ## Auteur
 
-- Noa
+- Noa & Gabriel
